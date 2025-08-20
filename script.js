@@ -5,8 +5,6 @@ const createGameboard = function () {
     ["bot-left", "bot-center", "bot-right"], // bottom row
   ];
 
-  const getGameboard = () => boardPositions;
-
   const resetGameboard = () => {
     boardPositions = [
       [null, null, null], // top row
@@ -15,7 +13,13 @@ const createGameboard = function () {
     ];
   };
 
-  return { getGameboard, resetGameboard };
+  const getGameboard = () => boardPositions;
+
+  const assignValue = (value, row, index) => {
+    boardPositions[row][index] = value;
+  };
+
+  return { resetGameboard, getGameboard, assignValue };
 };
 
 const createPlayer = function () {};
@@ -26,4 +30,6 @@ const createGameflow = function () {};
 const gameboard = createGameboard();
 
 gameboard.resetGameboard();
+gameboard.assignValue("x", 1, 1);
+gameboard.assignValue("o", 0, 0);
 console.log(gameboard.getGameboard());

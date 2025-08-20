@@ -16,7 +16,9 @@ const createGameboard = function () {
   const getGameboard = () => boardPositions;
 
   const assignValue = (value, row, index) => {
-    boardPositions[row][index] = value;
+    boardPositions[row][index] === null
+      ? (boardPositions[row][index] = value)
+      : alert(`Sorry, that spot is taken.`);
   };
 
   return { resetGameboard, getGameboard, assignValue };
@@ -31,5 +33,5 @@ const gameboard = createGameboard();
 
 gameboard.resetGameboard();
 gameboard.assignValue("x", 1, 1);
-gameboard.assignValue("o", 0, 0);
+gameboard.assignValue("o", 1, 1);
 console.log(gameboard.getGameboard());

@@ -1,39 +1,39 @@
 const createGameboard = function () {
-  let boardPositions = [
-    ["top-left", "top-center", "top-right"], // top row
-    ["mid-left", "mid-center", "mid-right"], // middle row
-    ["bot-left", "bot-center", "bot-right"], // bottom row
+  let gameboard = [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
   ];
 
   const resetGameboard = () => {
-    boardPositions = [
-      [null, null, null], // top row
-      [null, null, null], // middle row
-      [null, null, null], // bottom row
+    gameboard = [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
     ];
   };
 
-  const getGameboard = () => boardPositions;
+  const getGameboard = () => gameboard;
 
-  const assignValue = (value, row, col) => {
-    boardPositions[row][col] === null
-      ? (boardPositions[row][col] = value)
+  const placeSymbol = (symbol, row, col) => {
+    gameboard[row][col] === null
+      ? (gameboard[row][col] = symbol)
       : alert(`Sorry, that spot is taken.`);
   };
 
   const evalGameboard = () => {
     for (let i = 0; i < 3; i++) {
       if (
-        boardPositions[i][0] === boardPositions[i][1] &&
-        boardPositions[i][1] === boardPositions[i][2]
+        gameboard[i][0] === gameboard[i][1] &&
+        gameboard[i][1] === gameboard[i][2]
       ) {
         console.log("Winner!");
         // handleWinner
       }
 
       if (
-        boardPositions[0][i] === boardPositions[1][i] &&
-        boardPositions[1][i] === boardPositions[2][i]
+        gameboard[0][i] === gameboard[1][i] &&
+        gameboard[1][i] === gameboard[2][i]
       ) {
         console.log("Winner!");
         // handleWinner
@@ -41,23 +41,23 @@ const createGameboard = function () {
     }
 
     if (
-      boardPositions[0][0] === boardPositions[1][1] &&
-      boardPositions[1][1] === boardPositions[2][2]
+      gameboard[0][0] === gameboard[1][1] &&
+      gameboard[1][1] === gameboard[2][2]
     ) {
       console.log("Winner!");
       // handleWinner
     }
 
     if (
-      boardPositions[0][2] === boardPositions[1][1] &&
-      boardPositions[1][1] === boardPositions[2][0]
+      gameboard[0][2] === gameboard[1][1] &&
+      gameboard[1][1] === gameboard[2][0]
     ) {
       console.log("Winner!");
       // handleWinner
     }
   };
 
-  return { resetGameboard, getGameboard, assignValue, evalGameboard };
+  return { resetGameboard, getGameboard, placeSymbol, evalGameboard };
 };
 
 const createPlayer = function (symbol) {
@@ -71,17 +71,3 @@ const createPlayer = function (symbol) {
 };
 
 const createGameflow = function () {};
-
-// intialize for testing/previewing in browser
-const gameboard = createGameboard();
-
-gameboard.resetGameboard();
-gameboard.assignValue("x", 1, 1);
-gameboard.assignValue("o", 0, 1);
-gameboard.assignValue("x", 1, 2);
-gameboard.assignValue("o", 0, 0);
-gameboard.assignValue("x", 2, 1);
-gameboard.evalGameboard();
-// gameboard.assignValue("o", 0, 2);
-// gameboard.evalGameboard();
-console.log(gameboard.getGameboard());

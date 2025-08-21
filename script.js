@@ -57,7 +57,15 @@ const createGameboard = function () {
     }
   };
 
-  return { resetGameboard, getGameboard, placeSymbol, evalGameboard };
+  const gameboardFull = () => gameboard.includes(null);
+
+  return {
+    resetGameboard,
+    getGameboard,
+    placeSymbol,
+    evalGameboard,
+    gameboardFull,
+  };
 };
 
 const createPlayer = function (symbol) {
@@ -72,7 +80,8 @@ const createPlayer = function (symbol) {
 
 const createGameflow = function () {
   // access to:
-  // resetGameboard, getGameboard, placeSymbol, evalGameboard, getPlayerMove
+  // resetGameboard, getGameboard, placeSymbol
+  // evalGameboard, getPlayerMove, gameboardFull
   const board = createGameboard();
   const playerOne = createPlayer("X");
   const playerTwo = createPlayer("O");
@@ -82,6 +91,8 @@ const createGameflow = function () {
 
   const makeMove = (currentPlayer) => {
     const move = currentPlayer.getPlayerMove();
+
+    gameOver = board.gameboardFull();
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
   };
 };

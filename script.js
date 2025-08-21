@@ -15,9 +15,9 @@ const createGameboard = function () {
 
   const getGameboard = () => boardPositions;
 
-  const assignValue = (value, row, index) => {
-    boardPositions[row][index] === null
-      ? (boardPositions[row][index] = value)
+  const assignValue = (value, row, col) => {
+    boardPositions[row][col] === null
+      ? (boardPositions[row][col] = value)
       : alert(`Sorry, that spot is taken.`);
   };
 

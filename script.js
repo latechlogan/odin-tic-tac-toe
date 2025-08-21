@@ -60,7 +60,15 @@ const createGameboard = function () {
   return { resetGameboard, getGameboard, assignValue, evalGameboard };
 };
 
-const createPlayer = function () {};
+const createPlayer = function (symbol) {
+  const getPlayerMove = () => {
+    const row = parseInt(prompt("Enter row (0-2):"));
+    const col = parseInt(prompt("Enter column (0-2):"));
+    return { symbol, row, col };
+  };
+
+  return { getPlayerMove };
+};
 
 const createGameflow = function () {};
 

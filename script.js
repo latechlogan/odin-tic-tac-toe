@@ -70,4 +70,20 @@ const createPlayer = function (symbol) {
   return { getPlayerMove };
 };
 
-const createGameflow = function () {};
+const createGameflow = function () {
+  // access to:
+  // resetGameboard, getGameboard, placeSymbol, evalGameboard, getPlayerMove
+  const board = createGameboard();
+  const playerOne = createPlayer("X");
+  const playerTwo = createPlayer("O");
+  let currentPlayer = playerOne;
+  let gameOver = false;
+  let winner = null;
+
+  const makeMove = (currentPlayer) => {
+    const move = currentPlayer.getPlayerMove();
+    currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
+  };
+};
+
+const game = createGameflow();

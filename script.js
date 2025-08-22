@@ -89,13 +89,23 @@ const createGameflow = function () {
   let gameOver = false;
   let winner = null;
 
-  const makeMove = (currentPlayer) => {
+  const makeMove = () => {
     const move = currentPlayer.getPlayerMove();
     board.placeSymbol(move.symbol, move.row, move.col);
 
+    // check for winner
     gameOver = board.gameboardFull();
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
   };
+
+  while (!gameOver) {
+    makeMove(currentPlayer);
+    console.table(board.getGameboard());
+
+    if (!gameOver) {
+      confirm(`${currentPlayer.symbol}'s turn. Ready? (Click OK)`);
+    }
+  }
 };
 
 const game = createGameflow();

@@ -25,35 +25,35 @@ const createGameboard = function () {
     for (let i = 0; i < 3; i++) {
       if (
         gameboard[i][0] === gameboard[i][1] &&
-        gameboard[i][1] === gameboard[i][2]
+        gameboard[i][1] === gameboard[i][2] &&
+        gameboard[i][0] !== null
       ) {
-        console.log("Winner!");
-        // handleWinner
+        return true;
       }
 
       if (
         gameboard[0][i] === gameboard[1][i] &&
-        gameboard[1][i] === gameboard[2][i]
+        gameboard[1][i] === gameboard[2][i] &&
+        gameboard[0][i] !== null
       ) {
-        console.log("Winner!");
-        // handleWinner
+        return true;
       }
     }
 
     if (
       gameboard[0][0] === gameboard[1][1] &&
-      gameboard[1][1] === gameboard[2][2]
+      gameboard[1][1] === gameboard[2][2] &&
+      gameboard[0][0] !== null
     ) {
-      console.log("Winner!");
-      // handleWinner
+      return true;
     }
 
     if (
       gameboard[0][2] === gameboard[1][1] &&
-      gameboard[1][1] === gameboard[2][0]
+      gameboard[1][1] === gameboard[2][0] &&
+      gameboard[0][2] !== null
     ) {
-      console.log("Winner!");
-      // handleWinner
+      return true;
     }
   };
 
@@ -87,16 +87,19 @@ const createGameflow = function () {
   const playerTwo = createPlayer("O");
   let currentPlayer = playerOne;
   let gameOver = false;
-  let winner = null;
+  let winner = false;
 
   const makeMove = () => {
     const move = currentPlayer.getPlayerMove();
     board.placeSymbol(move.symbol, move.row, move.col);
     console.table(board.getGameboard());
 
-    // check for winner
-    gameOver = board.gameboardFull();
+    winner = board.evalGameboard();
+    if (winner || board.gameboardFull()) {
+      gameOver = true;
+    }
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
+    console.log({ currentPlayer, gameOver, winner });
   };
 
   while (!gameOver) {

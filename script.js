@@ -91,6 +91,7 @@ const createGameflow = function () {
 
   const makeMove = (currentPlayer) => {
     const move = currentPlayer.getPlayerMove();
+    board.placeSymbol(move.symbol, move.row, move.col);
 
     gameOver = board.gameboardFull();
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;

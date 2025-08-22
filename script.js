@@ -75,7 +75,7 @@ const createPlayer = function (symbol) {
     return { symbol, row, col };
   };
 
-  return { getPlayerMove };
+  return { symbol, getPlayerMove };
 };
 
 const createGameflow = function () {

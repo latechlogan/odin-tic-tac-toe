@@ -1,8 +1,8 @@
 const createGameboard = function () {
   let gameboard = [
-    ["X", "X", "X"],
-    ["X", null, "X"],
-    ["X", "X", "X"],
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
   ];
 
   const resetGameboard = () => {
@@ -90,17 +90,18 @@ const createGameflow = function () {
   let winner = null;
 
   const makeMove = () => {
-    console.log(board.gameboardFull());
     const move = currentPlayer.getPlayerMove();
     board.placeSymbol(move.symbol, move.row, move.col);
+    console.table(board.getGameboard());
 
     // check for winner
     gameOver = board.gameboardFull();
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
-    console.log(board.gameboardFull());
   };
 
-  makeMove(currentPlayer);
+  while (!gameOver) {
+    makeMove(currentPlayer);
+  }
 };
 
 const game = createGameflow();

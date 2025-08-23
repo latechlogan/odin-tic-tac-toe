@@ -86,24 +86,58 @@ const createGameflow = function () {
   const playerOne = createPlayer("X");
   const playerTwo = createPlayer("O");
   let currentPlayer = playerOne;
+  let gameboardFull = false;
   let gameOver = false;
-  let winner = false;
+  let haveWinner = false;
+  let winner = null;
 
   const makeMove = () => {
     const move = currentPlayer.getPlayerMove();
     board.placeSymbol(move.symbol, move.row, move.col);
-    console.table(board.getGameboard());
+  };
 
-    winner = board.evalGameboard();
-    if (winner || board.gameboardFull()) {
-      gameOver = true;
-    }
+  const updateWin = () => {
+    haveWinner = board.evalGameboard();
+  };
+
+  const updateGameboardFull = () => {
+    gameboardFull = board.gameboardFull();
+  };
+
+  const updateCurrentPlayer = () => {
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
-    console.log({ currentPlayer, gameOver, winner });
+  };
+
+  const displayGameboard = () => {
+    console.table(board.getGameboard());
+  };
+
+  const handleEndgame = () => {
+    gameOver = true;
+
+    if (haveWinner) {
+      winner = currentPlayer.symbol;
+    } else {
+      winner = "Cat";
+    }
+
+    console.log(`${winner} wins!`);
+  };
+
+  const handleTurn = () => {
+    makeMove(currentPlayer);
+    displayGameboard();
+    updateWin();
+    updateGameboardFull();
+    if (haveWinner || gameboardFull) {
+      handleEndgame();
+      return;
+    }
+    updateCurrentPlayer();
   };
 
   while (!gameOver) {
-    makeMove(currentPlayer);
+    handleTurn();
   }
 };
 

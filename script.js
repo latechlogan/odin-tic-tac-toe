@@ -1,4 +1,4 @@
-const createGameboard = function () {
+const gameboardController = function () {
   let gameboard = [
     [null, null, null],
     [null, null, null],
@@ -68,7 +68,7 @@ const createGameboard = function () {
   };
 };
 
-const createPlayer = function (symbol) {
+const playerController = function (symbol) {
   const getPlayerMove = () => {
     const row = parseInt(prompt("Enter row (0-2):"));
     const col = parseInt(prompt("Enter column (0-2):"));
@@ -78,13 +78,10 @@ const createPlayer = function (symbol) {
   return { symbol, getPlayerMove };
 };
 
-const createGameflow = function () {
-  // access to:
-  // resetGameboard, getGameboard, placeSymbol
-  // evalGameboard, getPlayerMove, gameboardFull
-  const board = createGameboard();
-  const playerOne = createPlayer("X");
-  const playerTwo = createPlayer("O");
+const gameflowController = function () {
+  const board = gameboardController();
+  const playerOne = playerController("X");
+  const playerTwo = playerController("O");
   let currentPlayer = playerOne;
   let gameboardFull = false;
   let gameOver = false;
@@ -136,9 +133,11 @@ const createGameflow = function () {
     updateCurrentPlayer();
   };
 
-  while (!gameOver) {
-    handleTurn();
-  }
+  // while (!gameOver) {
+  //   handleTurn();
+  // }
+
+  return { board };
 };
 
-const game = createGameflow();
+const game = gameflowController();

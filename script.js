@@ -69,7 +69,15 @@ const gameboardController = function () {
 };
 
 const playerController = function (symbol) {
-  return { symbol };
+  let playerName;
+
+  const setPlayerName = (name) => {
+    playerName = name;
+  };
+
+  const getPlayerName = () => playerName;
+
+  return { symbol, setPlayerName, getPlayerName };
 };
 
 const gameflowController = function () {
@@ -82,31 +90,23 @@ const gameflowController = function () {
   let haveWinner = false;
   let winner = null;
 
-  const updateWin = () => {
-    haveWinner = board.evalGameboard();
-  };
+  const updateWin = () => (haveWinner = board.evalGameboard());
 
-  const updateGameboardFull = () => {
-    gameboardFull = board.gameboardFull();
-  };
+  const updateGameboardFull = () => (gameboardFull = board.gameboardFull());
 
   const updateCurrentPlayer = () => {
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
   };
 
-  const getWinner = () => {
-    return winner;
-  };
+  const getWinner = () => winner;
 
-  const getGameOverStatus = () => {
-    return gameOver;
-  };
+  const getGameOverStatus = () => gameOver;
 
   const handleEndgame = () => {
     gameOver = true;
 
     if (haveWinner) {
-      winner = currentPlayer.symbol;
+      winner = currentPlayer.getPlayerName();
     } else {
       winner = "Cat";
     }
@@ -123,15 +123,43 @@ const gameflowController = function () {
     updateCurrentPlayer();
   };
 
-  return { board, getGameOverStatus, getWinner, handleTurn };
+  return {
+    board,
+    playerOne,
+    playerTwo,
+    getGameOverStatus,
+    getWinner,
+    handleTurn,
+  };
 };
 
 const displayController = (function () {
-  const game = gameflowController();
+  let game = gameflowController();
   const viewBoard = document.querySelector(".board");
   const viewSpaces = Array.from(document.querySelectorAll(".board__space"));
-  const dialog = document.querySelector("dialog");
+  const dialogNames = document.querySelector(".dialog-names");
+  const dialogWin = document.querySelector(".dialog-win");
   const winOutput = document.querySelector(".win-output");
+
+  const addPlayerNames = (function () {
+    dialogNames.showModal();
+    document.querySelector("form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const playerNameX = document.querySelector("#player-name-x").value;
+      const playerNameO = document.querySelector("#player-name-o").value;
+      game.playerOne.setPlayerName(playerNameX);
+      game.playerTwo.setPlayerName(playerNameO);
+      addNameToView(playerNameX, playerNameO);
+      dialogNames.close();
+    });
+  })();
+
+  const addNameToView = (nameX, nameO) => {
+    document.querySelector(".players__name-x").innerHTML = "";
+    document.querySelector(".players__name-x").textContent = `X: ${nameX}`;
+    document.querySelector(".players__name-o").innerHTML = "";
+    document.querySelector(".players__name-o").textContent = `O: ${nameO}`;
+  };
 
   const displayGameboard = (element) => {
     console.table(game.board.getGameboard());
@@ -146,16 +174,16 @@ const displayController = (function () {
     if (game.getGameOverStatus()) {
       winOutput.innerHTML = "";
       winOutput.textContent = `${game.getWinner()} wins!`;
-      dialog.showModal();
-      viewSpaces.forEach((space) => (space.innerHTML = ""));
+      dialogWin.showModal();
     }
   });
 
   document.querySelector(".dialog-yes").addEventListener("click", function () {
-    dialog.close();
+    viewSpaces.forEach((space) => (space.innerHTML = ""));
+    dialogWin.close();
   });
 
   document.querySelector(".dialog-no").addEventListener("click", function () {
-    dialog.close();
+    dialogWin.close();
   });
 })();

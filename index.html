@@ -7,7 +7,32 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <dialog>
+    <dialog class="dialog-names">
+      <form action="#">
+        <p>Team X</p>
+        <p class="form-group">
+          <label for="player-name-x">Player Name </label>
+          <input
+            type="text"
+            id="player-name-x"
+            name="player-name-x"
+            placeholder="Player 1"
+          />
+        </p>
+        <p>Team O</p>
+        <p class="form-group">
+          <label for="player-name-o">Player Name </label>
+          <input
+            type="text"
+            id="player-name-o"
+            name="player-name-o"
+            placeholder="Player 2"
+          />
+        </p>
+        <button type="submit">Start Game</button>
+      </form>
+    </dialog>
+    <dialog class="dialog-win">
       <p class="win-output"></p>
       <p>
         Play again?
@@ -26,6 +51,10 @@
       <div class="board__space" data-row="2" data-col="0"></div>
       <div class="board__space" data-row="2" data-col="1"></div>
       <div class="board__space" data-row="2" data-col="2"></div>
+    </div>
+    <div class="players">
+      <p class="players__name-x"></p>
+      <p class="players__name-o"></p>
     </div>
   </body>
   <script src="script.js"></script>

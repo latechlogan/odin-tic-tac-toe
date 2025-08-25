@@ -69,13 +69,7 @@ const gameboardController = function () {
 };
 
 const playerController = function (symbol) {
-  const getPlayerMove = () => {
-    const row = parseInt(prompt("Enter row (0-2):"));
-    const col = parseInt(prompt("Enter column (0-2):"));
-    return { symbol, row, col };
-  };
-
-  return { symbol, getPlayerMove };
+  return { symbol };
 };
 
 const gameflowController = function () {
@@ -88,11 +82,6 @@ const gameflowController = function () {
   let haveWinner = false;
   let winner = null;
 
-  const makeMove = () => {
-    const move = currentPlayer.getPlayerMove();
-    board.placeSymbol(move.symbol, move.row, move.col);
-  };
-
   const updateWin = () => {
     haveWinner = board.evalGameboard();
   };
@@ -103,10 +92,6 @@ const gameflowController = function () {
 
   const updateCurrentPlayer = () => {
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
-  };
-
-  const displayGameboard = () => {
-    console.table(board.getGameboard());
   };
 
   const handleEndgame = () => {
@@ -121,9 +106,8 @@ const gameflowController = function () {
     console.log(`${winner} wins!`);
   };
 
-  const handleTurn = () => {
-    makeMove(currentPlayer);
-    displayGameboard();
+  const handleTurn = (row, col) => {
+    board.placeSymbol(currentPlayer.symbol, row, col);
     updateWin();
     updateGameboardFull();
     if (haveWinner || gameboardFull) {
@@ -133,11 +117,24 @@ const gameflowController = function () {
     updateCurrentPlayer();
   };
 
-  // while (!gameOver) {
-  //   handleTurn();
-  // }
-
-  return { board };
+  return { board, handleTurn };
 };
 
-const game = gameflowController();
+const displayController = (function () {
+  const game = gameflowController();
+
+  const viewBoard = document.querySelector(".board");
+  const viewSpaces = Array.from(document.querySelectorAll(".board__space"));
+
+  const displayGameboard = (element) => {
+    console.table(game.board.getGameboard());
+    element.innerHTML = "";
+    element.textContent =
+      game.board.getGameboard()[element.dataset.row][element.dataset.col];
+  };
+
+  viewBoard.addEventListener("click", function (e) {
+    game.handleTurn(e.target.dataset.row, e.target.dataset.col);
+    displayGameboard(e.target);
+  });
+})();

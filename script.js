@@ -94,6 +94,14 @@ const gameflowController = function () {
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
   };
 
+  const getWinner = () => {
+    return winner;
+  };
+
+  const getGameOverStatus = () => {
+    return gameOver;
+  };
+
   const handleEndgame = () => {
     gameOver = true;
 
@@ -102,8 +110,6 @@ const gameflowController = function () {
     } else {
       winner = "Cat";
     }
-
-    console.log(`${winner} wins!`);
   };
 
   const handleTurn = (row, col) => {
@@ -117,14 +123,15 @@ const gameflowController = function () {
     updateCurrentPlayer();
   };
 
-  return { board, handleTurn };
+  return { board, getGameOverStatus, getWinner, handleTurn };
 };
 
 const displayController = (function () {
   const game = gameflowController();
-
   const viewBoard = document.querySelector(".board");
   const viewSpaces = Array.from(document.querySelectorAll(".board__space"));
+  const dialog = document.querySelector("dialog");
+  const winOutput = document.querySelector(".win-output");
 
   const displayGameboard = (element) => {
     console.table(game.board.getGameboard());
@@ -136,5 +143,19 @@ const displayController = (function () {
   viewBoard.addEventListener("click", function (e) {
     game.handleTurn(e.target.dataset.row, e.target.dataset.col);
     displayGameboard(e.target);
+    if (game.getGameOverStatus()) {
+      winOutput.innerHTML = "";
+      winOutput.textContent = `${game.getWinner()} wins!`;
+      dialog.showModal();
+      viewSpaces.forEach((space) => (space.innerHTML = ""));
+    }
+  });
+
+  document.querySelector(".dialog-yes").addEventListener("click", function () {
+    dialog.close();
+  });
+
+  document.querySelector(".dialog-no").addEventListener("click", function () {
+    dialog.close();
   });
 })();

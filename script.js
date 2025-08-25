@@ -147,9 +147,20 @@ const displayController = (function () {
       e.preventDefault();
       const playerNameX = document.querySelector("#player-name-x").value;
       const playerNameO = document.querySelector("#player-name-o").value;
-      game.playerOne.setPlayerName(playerNameX);
-      game.playerTwo.setPlayerName(playerNameO);
-      addNameToView(playerNameX, playerNameO);
+      if (playerNameX) {
+        game.playerOne.setPlayerName(playerNameX);
+      } else {
+        game.playerOne.setPlayerName("Player 1");
+      }
+      if (playerNameO) {
+        game.playerTwo.setPlayerName(playerNameO);
+      } else {
+        game.playerTwo.setPlayerName("Player 2");
+      }
+      addNameToView(
+        game.playerOne.getPlayerName(),
+        game.playerTwo.getPlayerName()
+      );
       dialogNames.close();
     });
   })();

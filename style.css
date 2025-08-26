@@ -1,4 +1,260 @@
+/* CSS RESET */
+
+/*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+ul {
+  list-style: none;
+}
+button,
+input,
+select {
+  margin: 0;
+}
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
+iframe {
+  border: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td,
+th {
+  padding: 0;
+}
+
+/* VARIABLES */
+
+:root[data-theme="light"] {
+  --text: hsl(256, 87%, 6%);
+  --background: hsl(254, 81%, 94%);
+  --primary: hsl(257, 90%, 54%);
+  --secondary: hsl(293, 89%, 71%);
+  --accent: hsl(302, 89%, 64%);
+
+  --background-5: hsla(254, 81%, 94%, 0.05);
+  --background-10: hsla(254, 81%, 94%, 0.1);
+  --background-20: hsla(254, 81%, 94%, 0.2);
+  --background-30: hsla(254, 81%, 94%, 0.3);
+  --background-40: hsla(254, 81%, 94%, 0.4);
+  --background-50: hsla(254, 81%, 94%, 0.5);
+  --background-60: hsla(254, 81%, 94%, 0.6);
+  --background-70: hsla(254, 81%, 94%, 0.7);
+  --background-80: hsla(254, 81%, 94%, 0.8);
+  --background-90: hsla(254, 81%, 94%, 0.9);
+  --background-95: hsla(254, 81%, 94%, 0.95);
+
+  --primary-5: hsl(257, 90%, 54%, 0.05);
+  --primary-10: hsl(257, 90%, 54%, 0.1);
+  --primary-20: hsl(257, 90%, 54%, 0.2);
+  --primary-30: hsl(257, 90%, 54%, 0.3);
+  --primary-40: hsl(257, 90%, 54%, 0.4);
+  --primary-50: hsl(257, 90%, 54%, 0.5);
+  --primary-60: hsl(257, 90%, 54%, 0.6);
+  --primary-70: hsl(257, 90%, 54%, 0.7);
+  --primary-80: hsl(257, 90%, 54%, 0.8);
+  --primary-90: hsl(257, 90%, 54%, 0.9);
+  --primary-95: hsl(257, 90%, 54%, 0.95);
+
+  --secondary-5: hsl(293, 89%, 71%, 0.05);
+  --secondary-10: hsl(293, 89%, 71%, 0.1);
+  --secondary-20: hsl(293, 89%, 71%, 0.2);
+  --secondary-30: hsl(293, 89%, 71%, 0.3);
+  --secondary-40: hsl(293, 89%, 71%, 0.4);
+  --secondary-50: hsl(293, 89%, 71%, 0.5);
+  --secondary-60: hsl(293, 89%, 71%, 0.6);
+  --secondary-70: hsl(293, 89%, 71%, 0.7);
+  --secondary-80: hsl(293, 89%, 71%, 0.8);
+  --secondary-90: hsl(293, 89%, 71%, 0.9);
+  --secondary-95: hsl(293, 89%, 71%, 0.95);
+
+  --accent-5: hsl(302, 89%, 64%, 0.05);
+  --accent-10: hsl(302, 89%, 64%, 0.1);
+  --accent-20: hsl(302, 89%, 64%, 0.2);
+  --accent-30: hsl(302, 89%, 64%, 0.3);
+  --accent-40: hsl(302, 89%, 64%, 0.4);
+  --accent-50: hsl(302, 89%, 64%, 0.5);
+  --accent-60: hsl(302, 89%, 64%, 0.6);
+  --accent-70: hsl(302, 89%, 64%, 0.7);
+  --accent-80: hsl(302, 89%, 64%, 0.8);
+  --accent-90: hsl(302, 89%, 64%, 0.9);
+  --accent-95: hsl(302, 89%, 64%, 0.95);
+}
+
+:root[data-theme="dark"] {
+  --text: hsl(256, 87%, 94%);
+  --background: hsl(254, 81%, 6%);
+  --primary: hsl(257, 90%, 46%);
+  --secondary: hsl(293, 89%, 29%);
+  --accent: hsl(302, 89%, 36%);
+
+  --background-5: hsl(254, 81%, 6%, 0.05);
+  --background-10: hsl(254, 81%, 6%, 0.1);
+  --background-20: hsl(254, 81%, 6%, 0.2);
+  --background-30: hsl(254, 81%, 6%, 0.3);
+  --background-40: hsl(254, 81%, 6%, 0.4);
+  --background-50: hsl(254, 81%, 6%, 0.5);
+  --background-60: hsl(254, 81%, 6%, 0.6);
+  --background-70: hsl(254, 81%, 6%, 0.7);
+  --background-80: hsl(254, 81%, 6%, 0.8);
+  --background-90: hsl(254, 81%, 6%, 0.9);
+  --background-95: hsl(254, 81%, 6%, 0.95);
+
+  --primary-5: hsl(257, 90%, 46%, 0.05);
+  --primary-10: hsl(257, 90%, 46%, 0.1);
+  --primary-20: hsl(257, 90%, 46%, 0.2);
+  --primary-30: hsl(257, 90%, 46%, 0.3);
+  --primary-40: hsl(257, 90%, 46%, 0.4);
+  --primary-50: hsl(257, 90%, 46%, 0.5);
+  --primary-60: hsl(257, 90%, 46%, 0.6);
+  --primary-70: hsl(257, 90%, 46%, 0.7);
+  --primary-80: hsl(257, 90%, 46%, 0.8);
+  --primary-90: hsl(257, 90%, 46%, 0.9);
+  --primary-95: hsl(257, 90%, 46%, 0.95);
+
+  --secondary-5: hsl(293, 89%, 29%, 0.05);
+  --secondary-10: hsl(293, 89%, 29%, 0.1);
+  --secondary-20: hsl(293, 89%, 29%, 0.2);
+  --secondary-30: hsl(293, 89%, 29%, 0.3);
+  --secondary-40: hsl(293, 89%, 29%, 0.4);
+  --secondary-50: hsl(293, 89%, 29%, 0.5);
+  --secondary-60: hsl(293, 89%, 29%, 0.6);
+  --secondary-70: hsl(293, 89%, 29%, 0.7);
+  --secondary-80: hsl(293, 89%, 29%, 0.8);
+  --secondary-90: hsl(293, 89%, 29%, 0.9);
+  --secondary-95: hsl(293, 89%, 29%, 0.95);
+
+  --accent-5: hsl(302, 89%, 36%, 0.05);
+  --accent-10: hsl(302, 89%, 36%, 0.1);
+  --accent-20: hsl(302, 89%, 36%, 0.2);
+  --accent-30: hsl(302, 89%, 36%, 0.3);
+  --accent-40: hsl(302, 89%, 36%, 0.4);
+  --accent-50: hsl(302, 89%, 36%, 0.5);
+  --accent-60: hsl(302, 89%, 36%, 0.6);
+  --accent-70: hsl(302, 89%, 36%, 0.7);
+  --accent-80: hsl(302, 89%, 36%, 0.8);
+  --accent-90: hsl(302, 89%, 36%, 0.9);
+  --accent-95: hsl(302, 89%, 36%, 0.95);
+}
+
+/* TYPOGRAPHY */
+
+:root {
+  font-size: 16px;
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-weight: 700;
+}
+
+.h1 {
+  font-size: 3.815rem;
+}
+.h2 {
+  font-size: 3.052rem;
+}
+.h3 {
+  font-size: 2.441rem;
+}
+.h4 {
+  font-size: 1.953rem;
+}
+.h5 {
+  font-size: 1.563rem;
+}
+.h6 {
+  font-size: 1.25rem;
+}
+.p {
+  font-size: 1rem;
+}
+.small {
+  font-size: 0.8rem;
+}
+
+/* GLOBAL ELEMENTS */
+
+button {
+  color: var(--text);
+  padding: 0.5rem 1rem;
+  margin: 0;
+  background-color: var(--secondary);
+  border: none;
+  border-radius: 0.25rem;
+}
+
+/* ELEMENT STYLES */
+
+body {
+  color: var(--text);
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .board {
+  padding: 1rem;
+  margin: 1rem;
+  background-color: var(--secondary-10);
+  border-radius: 0.5rem;
   display: grid;
   grid-template-columns: repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
@@ -7,5 +263,37 @@
 .board__space {
   width: 100%;
   height: 100%;
-  border: 1px solid #ddd;
+  border: 2px solid var(--secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.board__space[data-row="0"] {
+  border-top: none;
+}
+
+.board__space[data-row="2"] {
+  border-bottom: none;
+}
+
+.board__space[data-col="0"] {
+  border-left: none;
+}
+
+.board__space[data-col="2"] {
+  border-right: none;
+}
+
+.players {
+  width: 332px;
+}
+
+.players > * {
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: var(--secondary-20);
+  border-radius: 0.5rem;
 }

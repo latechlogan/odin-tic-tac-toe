@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Odin | Tic-Tac-Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -39,25 +45,25 @@
         <button class="dialog-newgame">New Game</button>
       </p>
     </dialog>
-    <h1>Odin Tic-Tac-Toe</h1>
+    <h1 class="h1">Odin Tic-Tac-Toe</h1>
     <div class="game-controls">
-      <button class="new-game">New Game</button>
-      <button class="reset-game">Reset</button>
+      <button class="new-game p">New Game</button>
+      <button class="reset-game p">Reset</button>
     </div>
     <div class="board">
-      <div class="board__space" data-row="0" data-col="0"></div>
-      <div class="board__space" data-row="0" data-col="1"></div>
-      <div class="board__space" data-row="0" data-col="2"></div>
-      <div class="board__space" data-row="1" data-col="0"></div>
-      <div class="board__space" data-row="1" data-col="1"></div>
-      <div class="board__space" data-row="1" data-col="2"></div>
-      <div class="board__space" data-row="2" data-col="0"></div>
-      <div class="board__space" data-row="2" data-col="1"></div>
-      <div class="board__space" data-row="2" data-col="2"></div>
+      <div class="board__space h2" data-row="0" data-col="0"></div>
+      <div class="board__space h2" data-row="0" data-col="1"></div>
+      <div class="board__space h2" data-row="0" data-col="2"></div>
+      <div class="board__space h2" data-row="1" data-col="0"></div>
+      <div class="board__space h2" data-row="1" data-col="1"></div>
+      <div class="board__space h2" data-row="1" data-col="2"></div>
+      <div class="board__space h2" data-row="2" data-col="0"></div>
+      <div class="board__space h2" data-row="2" data-col="1"></div>
+      <div class="board__space h2" data-row="2" data-col="2"></div>
     </div>
     <div class="players">
-      <p class="players__name-x"></p>
-      <p class="players__name-o"></p>
+      <p class="players__name-x h5">X:</p>
+      <p class="players__name-o h5">O:</p>
     </div>
   </body>
   <script src="script.js"></script>

@@ -175,15 +175,12 @@ const displayController = () => {
   };
 
   const addNameToView = (nameX, nameO) => {
-    document.querySelector(".players__name-x").innerHTML = "";
     document.querySelector(".players__name-x").textContent = `X: ${nameX}`;
-    document.querySelector(".players__name-o").innerHTML = "";
     document.querySelector(".players__name-o").textContent = `O: ${nameO}`;
   };
 
   const displayGameboard = (element) => {
     console.table(game.board.getGameboard());
-    element.innerHTML = "";
     element.textContent =
       game.board.getGameboard()[element.dataset.row][element.dataset.col];
   };
@@ -197,7 +194,6 @@ const displayController = () => {
     game.handleTurn(e.target.dataset.row, e.target.dataset.col);
     displayGameboard(e.target);
     if (game.getGameOverStatus()) {
-      winOutput.innerHTML = "";
       winOutput.textContent = `${game.getWinner()} wins!`;
       dialogWin.showModal();
     }

@@ -233,7 +233,7 @@ th {
 button {
   color: var(--text);
   padding: 0.5rem 1rem;
-  margin: 0;
+  margin: 0 0.5rem 0 0;
   background-color: var(--secondary);
   border: none;
   border-radius: 0.25rem;
@@ -248,6 +248,19 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.game-controls {
+  width: 332px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.display-mode {
+  margin-left: auto;
+  background-color: var(--primary-20);
 }
 
 .board {
@@ -294,6 +307,6 @@ body {
   width: 100%;
   padding: 1rem;
   margin: 1rem 0;
-  background-color: var(--secondary-20);
+  background-color: var(--primary-20);
   border-radius: 0.5rem;
 }

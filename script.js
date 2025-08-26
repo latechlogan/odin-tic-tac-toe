@@ -186,7 +186,6 @@ const displayController = () => {
   };
 
   const displayGameboard = (element) => {
-    console.table(game.board.getGameboard());
     element.textContent =
       game.board.getGameboard()[element.dataset.row][element.dataset.col];
   };

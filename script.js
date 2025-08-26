@@ -90,6 +90,14 @@ const gameflowController = function () {
   let haveWinner = false;
   let winner = null;
 
+  const resetStateValues = () => {
+    currentPlayer = playerOne;
+    gameboardFull = false;
+    gameOver = false;
+    haveWinner = false;
+    winner = null;
+  };
+
   const updateWin = () => (haveWinner = board.evalGameboard());
 
   const updateGameboardFull = () => (gameboardFull = board.gameboardFull());
@@ -127,13 +135,14 @@ const gameflowController = function () {
     board,
     playerOne,
     playerTwo,
+    resetStateValues,
     getGameOverStatus,
     getWinner,
     handleTurn,
   };
 };
 
-const displayController = (function () {
+const displayController = () => {
   let game = gameflowController();
   const viewBoard = document.querySelector(".board");
   const viewSpaces = Array.from(document.querySelectorAll(".board__space"));
@@ -141,7 +150,7 @@ const displayController = (function () {
   const dialogWin = document.querySelector(".dialog-win");
   const winOutput = document.querySelector(".win-output");
 
-  const addPlayerNames = (function () {
+  const addPlayerNames = function () {
     dialogNames.showModal();
     document.querySelector("form").addEventListener("submit", function (e) {
       e.preventDefault();
@@ -163,7 +172,7 @@ const displayController = (function () {
       );
       dialogNames.close();
     });
-  })();
+  };
 
   const addNameToView = (nameX, nameO) => {
     document.querySelector(".players__name-x").innerHTML = "";
@@ -179,6 +188,11 @@ const displayController = (function () {
       game.board.getGameboard()[element.dataset.row][element.dataset.col];
   };
 
+  const clearGameboard = () => {
+    game.board.resetGameboard();
+    viewSpaces.forEach((space) => (space.innerHTML = ""));
+  };
+
   viewBoard.addEventListener("click", function (e) {
     game.handleTurn(e.target.dataset.row, e.target.dataset.col);
     displayGameboard(e.target);
@@ -189,12 +203,34 @@ const displayController = (function () {
     }
   });
 
-  document.querySelector(".dialog-yes").addEventListener("click", function () {
-    viewSpaces.forEach((space) => (space.innerHTML = ""));
+  const handlePlayAgain = () => {
+    clearGameboard();
+    game.resetStateValues();
     dialogWin.close();
+  };
+
+  const handleNewGame = () => {
+    clearGameboard();
+    game.resetStateValues();
+    dialogWin.close();
+    addPlayerNames();
+  };
+
+  document
+    .querySelector(".dialog-again")
+    .addEventListener("click", handlePlayAgain);
+
+  document
+    .querySelector(".dialog-newgame")
+    .addEventListener("click", handleNewGame);
+
+  document.querySelector(".new-game").addEventListener("click", function () {
+    handleNewGame();
   });
 
-  document.querySelector(".dialog-no").addEventListener("click", function () {
-    dialogWin.close();
+  document.querySelector(".reset-game").addEventListener("click", function () {
+    handlePlayAgain();
   });
-})();
+};
+
+displayController();

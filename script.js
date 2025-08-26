@@ -16,9 +16,12 @@ const gameboardController = function () {
   const getGameboard = () => gameboard;
 
   const placeSymbol = (symbol, row, col) => {
-    gameboard[row][col] === null
-      ? (gameboard[row][col] = symbol)
-      : alert(`Sorry, that spot is taken.`);
+    if (gameboard[row][col] === null) {
+      gameboard[row][col] = symbol;
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const evalGameboard = () => {
@@ -121,7 +124,10 @@ const gameflowController = function () {
   };
 
   const handleTurn = (row, col) => {
-    board.placeSymbol(currentPlayer.symbol, row, col);
+    const moveSuccessful = board.placeSymbol(currentPlayer.symbol, row, col);
+
+    if (!moveSuccessful) return;
+
     updateWin();
     updateGameboardFull();
     if (haveWinner || gameboardFull) {

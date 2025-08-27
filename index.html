@@ -15,9 +15,8 @@
   <body>
     <dialog class="dialog-names">
       <form action="#">
-        <p>Team X</p>
         <p class="form-group">
-          <label for="player-name-x">Player Name </label>
+          <label for="player-name-x" class="h6">Player Name (X)</label>
           <input
             type="text"
             id="player-name-x"
@@ -25,9 +24,8 @@
             placeholder="Player 1"
           />
         </p>
-        <p>Team O</p>
         <p class="form-group">
-          <label for="player-name-o">Player Name </label>
+          <label for="player-name-o" class="h6">Player Name (O)</label>
           <input
             type="text"
             id="player-name-o"
@@ -39,13 +37,13 @@
       </form>
     </dialog>
     <dialog class="dialog-win">
-      <p class="win-output"></p>
+      <p class="win-output h6"></p>
       <p>
         <button class="dialog-again">Play Again</button>
         <button class="dialog-newgame">New Game</button>
       </p>
     </dialog>
-    <h1 class="h2">Odin Tic-Tac-Toe</h1>
+    <h1 class="page-title h2">Tic-Tac-Toe</h1>
     <div class="game-controls">
       <button class="new-game p">New Game</button>
       <button class="reset-game p">Reset</button>
@@ -86,8 +84,8 @@
       <div class="board__space h2" data-row="2" data-col="2"></div>
     </div>
     <div class="players">
-      <p class="players__name-x h5">X:</p>
-      <p class="players__name-o h5">O:</p>
+      <p class="players__name-x h6">X:</p>
+      <p class="players__name-o h6">O:</p>
     </div>
   </body>
   <script src="script.js"></script>
